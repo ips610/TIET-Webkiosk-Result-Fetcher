@@ -15,6 +15,7 @@ Install the Selenium module with the following command.
 
 ```
 
+You Should Have Google Chrome Installed In Your System. In the future, support will be added to all famous browsers.
 
 ## License
 
@@ -30,4 +31,4 @@ Install the Selenium module with the following command.
     See the License for the specific language governing permissions and
     limitations under the License.
 
-**NOTE**: This software depends on other packages that may be licensed under different open source licenses.
+**NOTE**: This software depends on other packages that may be licensed under different open-source licenses.

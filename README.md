@@ -4,7 +4,7 @@
 <br>
 You must have Python installed in your system, which should be added to the path.
 <br>
-Install the Selenium module with the following command.
+Install the following modules
 <br>
 <br>
 
@@ -12,6 +12,7 @@ Install the Selenium module with the following command.
 ```
 
  pip3 install selenium
+ pip3 install pynput
 
 ```
 

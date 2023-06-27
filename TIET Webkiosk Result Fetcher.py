@@ -1,42 +1,61 @@
+import logging
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from pynput import keyboard
 
-max_attempts = 5
-current_attempt = 1
-desired_url = "https://webkiosk.thapar.edu/StudentFiles/StudentPage.jsp"
+# Set up logging
+logging.basicConfig(
+    filename='logfile.txt',
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    level=logging.DEBUG
+)
+logger = logging.getLogger(__name__)
 
 # Set up the Chrome webdriver
 driver = webdriver.Chrome()
 
-while current_attempt <= max_attempts:
+# Flag to indicate if the program should exit
+exit_flag = False
+
+
+def on_key_press(key):
+    global exit_flag
+    exit_flag = True
+    return False
+
+
+try:
     # Perform login
     driver.get("https://webkiosk.thapar.edu")
-    username = driver.find_element(By.NAME, 'MemberCode')
-    password = driver.find_element(By.NAME, 'Password')
-    login_button = driver.find_element(By.NAME, 'BTNSubmit')
+    username = driver.find_element(By.NAME, "MemberCode")
+    password = driver.find_element(By.NAME, "Password")
+    login_button = driver.find_element(By.NAME, "BTNSubmit")
 
-    username.send_keys(102203274)  # enter your own username
-    password.send_keys(54321)  # enter your own password
+    username.send_keys("test")  # enter your own username
+    password.send_keys("test")  # enter your own password
     login_button.click()
 
-    time.sleep(10)  # Add a small delay to allow the page to load
+    logger.info("Login successful")
+    print("Success", flush=True)  # Print "Success" on the screen
 
-    if driver.current_url == desired_url:
-        print("Success")
+    # Wait for the desired page to load after login
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.url_to_be("https://webkiosk.thapar.edu/StudentFiles/StudentPage.jsp"))
 
-        # to perform further tasks on the opened webpage 
+    # Start listening for key press events
+    with keyboard.Listener(on_press=on_key_press) as listener:
         while True:
-            try:
-                pass  # You can perform additional actions or tests here
-            except KeyboardInterrupt:
-                break  # Exit the loop on keyboard interrupt (e.g., press Ctrl+C)
+            if exit_flag:
+                logger.info("Key press detected. Exiting the loop.")
+                print("Key press detected. Exiting the loop.", flush=True)
+                break
 
-        break
-    
-    current_attempt += 1
-    print(f"Attempt {current_attempt} failed. Retrying...")
+            # You can perform additional actions or tests here
 
-
-# Clean up
-driver.quit()
+finally:
+    # Clean up resources
+    driver.quit()
+    logger.info("Driver quit. Exiting the program.")

@@ -48,7 +48,7 @@ try:
     # Start listening for key press events
     with keyboard.Listener(on_press=on_key_press) as listener:
         while True:
-            if exit_flag:
+            if exit_flag or len(driver.window_handles) == 0:
                 logger.info("Key press detected. Exiting the loop.")
                 print("Key press detected. Exiting the loop.", flush=True)
                 break

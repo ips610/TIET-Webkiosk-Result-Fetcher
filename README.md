@@ -6,7 +6,6 @@ You must have Python installed in your system, which should be added to the path
 <br>
 Install the following modules
 <br>
-<br>
 
 
 ```
@@ -18,6 +17,28 @@ Install the following modules
 
 You Should Have Google Chrome Installed In Your System. In the future, support will be added to all famous browsers.
 
+## How To Run This
+Download the code from my GitHub Repo. Save it in a folder. Open <b>Terminal / Command Prompt</b> in that folder. Then run the following command.
+
+```
+
+python3 TIET\ Webkiosk\ Result\ Fetcher.py
+
+```
+
+It will prompt you for your username and password. Enter your credentials and you are good to go.
+
+### Alternate way 
+Open this folder in Visual Studio Code. Open Terminal in Visual Studio Code and run the following command.
+
+```
+
+python3 TIET\ Webkiosk\ Result\ Fetcher.py
+
+```
+
+It will prompt you for your username and password. Enter your credentials and you are good to go.
+<br>
 ## License
 
     The code in this repository is licensed under the GNU General Public Licence, Version 3.0 (the "License");

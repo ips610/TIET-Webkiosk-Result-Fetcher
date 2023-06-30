@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pynput import keyboard
 from selenium.common.exceptions import WebDriverException, NoSuchElementException
 
 # Set up logging
@@ -17,15 +16,6 @@ logger = logging.getLogger(__name__)
 
 # Set up the Chrome webdriver
 driver = webdriver.Chrome()
-
-# Flag to indicate if the program should exit
-# exit_flag = False
-
-
-def on_key_press(key):
-    global exit_flag
-    exit_flag = True
-    return False
 
 
 def get_user_credentials():
@@ -49,104 +39,99 @@ try:
     # Perform login
     try:
         # Start listening for key press events
-        with keyboard.Listener(on_press=on_key_press) as listener:
-            # Prompt the user for credentials
-            username_arg, password_arg = get_user_credentials()
-            driver.get("https://webkiosk.thapar.edu")
-            username = driver.find_element(By.NAME, "MemberCode")
-            password = driver.find_element(By.NAME, "Password")
-            login_button = driver.find_element(By.NAME, "BTNSubmit")
 
-            username.send_keys(username_arg)  # enter your own username
-            password.send_keys(password_arg)  # enter your own password
-            login_button.click()
-            driver.maximize_window()
+        # Prompt the user for credentials
+        username_arg, password_arg = get_user_credentials()
+        driver.get("https://webkiosk.thapar.edu")
+        username = driver.find_element(By.NAME, "MemberCode")
+        password = driver.find_element(By.NAME, "Password")
+        login_button = driver.find_element(By.NAME, "BTNSubmit")
 
-            # Wait for the desired page to load after login
-            wait = WebDriverWait(driver, 10)
-            login_success = wait.until(
-                EC.url_to_be("https://webkiosk.thapar.edu/StudentFiles/StudentPage.jsp")
-            )
-            if login_success:
-                logger.info("Login successful")
-                print("Success", flush=True)  # Print "Success" on the screen
+        username.send_keys(username_arg)  # enter your own username
+        password.send_keys(password_arg)  # enter your own password
+        login_button.click()
+        driver.maximize_window()
+
+        # Wait for the desired page to load after login
+        wait = WebDriverWait(driver, 10)
+        login_success = wait.until(
+            EC.url_to_be("https://webkiosk.thapar.edu/StudentFiles/StudentPage.jsp")
+        )
+        if login_success:
+            logger.info("Login successful")
+            print("Success", flush=True)  # Print "Success" on the screen
+            print()
+
+            try:
+                # Find the element with src="FrameLeftStudent.jsp" and click it
+                frameset = driver.find_element(
+                    By.XPATH, "//frame[@src='FrameLeftStudent.jsp']"
+                )
+                driver.switch_to.frame(frameset)
+
+                # Find the "exam info" div element
+
+                exam_info_div = driver.find_element(
+                    By.XPATH,
+                    '//div[@class="menutitle" and contains(text(),"Exam. Info.")]',
+                )
+
+                exam_info_div.click()
+
+                span_element = exam_info_div.find_element(
+                    By.XPATH, "./following-sibling::span"
+                )
+
+                a_elements = span_element.find_elements(By.TAG_NAME, "a")
+
+                for a in a_elements:
+                    print(a.text)
                 print()
-                
-                try:
 
-                    # Find the element with src="FrameLeftStudent.jsp" and click it
-                    frameset = driver.find_element(
-                        By.XPATH, "//frame[@src='FrameLeftStudent.jsp']"
-                    )
-                    driver.switch_to.frame(frameset)
+                option_choose = input("Enter Option Name to get details: ").lower()
+                print("You have chosen: ", option_choose)
+                print()
+                # User will choose from the options extracted from website
 
-                    
-                    # Find the "exam info" div element
-                    
-                    exam_info_div = driver.find_element(
-                        By.XPATH,
-                        '//div[@class="menutitle" and contains(text(),"Exam. Info.")]',
-                    )
-                    
-
-                    exam_info_div.click()
-
-                    span_element = exam_info_div.find_element(
-                        By.XPATH, "./following-sibling::span"
+                if option_choose == "exam marks":
+                    driver.get(
+                        "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
                     )
 
-                    a_elements = span_element.find_elements(By.TAG_NAME, "a")
-
-                    
-
-                    for a in a_elements:
-                        print(a.text)
-
-                    option_choose = input("Enter Option Name to get details ").lower()
-                    print("You have chosen: ", option_choose)
-                    # User will choose from the options extracted from website
-
-                    if option_choose == "exam marks":
-                        driver.get(
-                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
-                        )
-
-                    wait.until(
-                        EC.url_to_be(
-                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
-                        )
+                wait.until(
+                    EC.url_to_be(
+                        "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
                     )
+                )
 
-                    print("MARKS URL OPENED")
+                print("MARKS URL OPENED")
 
-                    show_button = wait.until(
-                        EC.element_to_be_clickable(
-                            (By.XPATH, '//input[@type="submit" and @value="Show"]')
-                        )
+                show_button = wait.until(
+                    EC.element_to_be_clickable(
+                        (By.XPATH, '//input[@type="submit" and @value="Show"]')
                     )
-                    show_button.click()
-                    print("Button Clicked")
+                )
+                show_button.click()
+                print("Button Clicked")
+
+            except NoSuchElementException:
+                print(
+                    "Frame or element not found. Performing alternative action.",
+                    flush=True,
+                )
+                # Perform alternative action or handle the situation
+
+        else:
+            raise WebDriverException("Wrong Credentials")
 
 
-                except NoSuchElementException:
-                    print(
-                        "Frame or element not found. Performing alternative action.",
-                        flush=True,
-                    )
-                    # Perform alternative action or handle the situation
-
+        while True:
+            if len(driver.window_handles) == 0:
+                logger.info("Key press detected. Exiting the loop.")
+                print("Key press detected. Exiting the loop.", flush=True)
+                break
             else:
-                raise WebDriverException("Wrong Credentials")
-
-            # Start listening for key press events
-            with keyboard.Listener(on_press=on_key_press) as listener:
-                while True:
-                    if len(driver.window_handles) == 0:
-                        logger.info("Key press detected. Exiting the loop.")
-                        print("Key press detected. Exiting the loop.", flush=True)
-                        break
-                    else:
-                        pass
+                pass
 
     except WebDriverException:
         print("Wrong Credentials", flush=True)

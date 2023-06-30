@@ -11,7 +11,6 @@ Install the following modules
 ```
 
  pip3 install selenium
- pip3 install pynput
 
 ```
 

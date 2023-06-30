@@ -9,6 +9,7 @@ from selenium.common.exceptions import WebDriverException, NoSuchElementExceptio
 # Set up logging
 logging.basicConfig(
     filename="logfile.txt",
+    filemode="w",
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     level=logging.DEBUG,
 )
@@ -69,24 +70,63 @@ try:
             if login_success:
                 logger.info("Login successful")
                 print("Success", flush=True)  # Print "Success" on the screen
-
+                print()
+                
                 try:
+
+                    # Find the element with src="FrameLeftStudent.jsp" and click it
                     frameset = driver.find_element(
                         By.XPATH, "//frame[@src='FrameLeftStudent.jsp']"
                     )
                     driver.switch_to.frame(frameset)
 
-                    # Find the element with src="FrameLeftStudent.jsp" and click it
-                    print("Success", flush=True)
-
+                    
                     # Find the "exam info" div element
-                    # exam_info_div = driver.find_element(By.ID, "exam-info")
+                    
                     exam_info_div = driver.find_element(
                         By.XPATH,
                         '//div[@class="menutitle" and contains(text(),"Exam. Info.")]',
                     )
-                    print("Found the exam info div:", exam_info_div.text)
+                    
+
                     exam_info_div.click()
+
+                    span_element = exam_info_div.find_element(
+                        By.XPATH, "./following-sibling::span"
+                    )
+
+                    a_elements = span_element.find_elements(By.TAG_NAME, "a")
+
+                    
+
+                    for a in a_elements:
+                        print(a.text)
+
+                    option_choose = input("Enter Option Name to get details ").lower()
+                    print("You have chosen: ", option_choose)
+                    # User will choose from the options extracted from website
+
+                    if option_choose == "exam marks":
+                        driver.get(
+                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
+                        )
+
+                    wait.until(
+                        EC.url_to_be(
+                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
+                        )
+                    )
+
+                    print("MARKS URL OPENED")
+
+                    show_button = wait.until(
+                        EC.element_to_be_clickable(
+                            (By.XPATH, '//input[@type="submit" and @value="Show"]')
+                        )
+                    )
+                    show_button.click()
+                    print("Button Clicked")
+
 
                 except NoSuchElementException:
                     print(

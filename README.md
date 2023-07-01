@@ -27,6 +27,8 @@ python3 TIET\ Webkiosk\ Result\ Fetcher.py
 
 ![Mac Terminal Command](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Mac%20Terminal%20Command.png)
 
+![Windows Command Prompt](https://github.com/MuskanChalana/TIET-Webkiosk-Result-Fetcher/blob/MBranch/Images/Windows%20CMD%20command.png)
+
 It will prompt you for your username and password. Enter your credentials and you are good to go.
 
 ### Alternate way 

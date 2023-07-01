@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException, NoSuchElementException
+from selenium.webdriver.support.select import Select
 
 # Set up logging
 logging.basicConfig(
@@ -106,6 +107,19 @@ try:
 
                 print("MARKS URL OPENED")
 
+
+                #prompt user for choosing the year of marks to be displayed
+
+                marks_year =  wait.until(EC.element_to_be_clickable((By.XPATH,"//select[@id='exam']")))
+                marks_year_select = Select(marks_year)
+                marks_year_options = marks_year_select.options
+
+                for option in marks_year_options:
+                    print(option.text)
+                user_marks_options_choose = int(input("Choose Option: "))
+                marks_year_select.select_by_index(user_marks_options_choose - 1)
+
+                
                 show_button = wait.until(
                     EC.element_to_be_clickable(
                         (By.XPATH, '//input[@type="submit" and @value="Show"]')

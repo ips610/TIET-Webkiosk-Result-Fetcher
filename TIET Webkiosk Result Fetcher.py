@@ -107,18 +107,17 @@ try:
 
                 print("MARKS URL OPENED")
 
+                # prompt user for choosing the year of marks to be displayed
 
-                #prompt user for choosing the year of marks to be displayed
-
-                marks_year =  wait.until(EC.element_to_be_clickable((By.XPATH,"//select[@id='exam']")))
+                marks_year = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, "//select[@id='exam']"))
+                )
                 marks_year_select = Select(marks_year)
                 marks_year_options = marks_year_select.options
 
                 for option in marks_year_options:
                     print(option.text)
                 user_marks_options_choose = int(input("Choose Option: "))
-                marks_year_select.select_by_index(user_marks_options_choose - 1)
-
                 
                 show_button = wait.until(
                     EC.element_to_be_clickable(
@@ -137,7 +136,6 @@ try:
 
         else:
             raise WebDriverException("Wrong Credentials")
-
 
         while True:
             if len(driver.window_handles) == 0:

@@ -141,8 +141,8 @@ try:
 
         while True:
             if len(driver.window_handles) == 0:
-                logger.info("Key press detected. Exiting the loop.")
-                print("Key press detected. Exiting the loop.", flush=True)
+                logger.info("You have closed the window. Program Stopped !")
+                print("You have closed the window. Program Stopped !", flush=True)
                 break
             else:
                 pass

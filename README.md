@@ -4,13 +4,13 @@
 <br>
 You must have Python installed in your system, which should be added to the path.
 <br>
-Install the following modules
+Install the modules with the following command by downloading the requirements.txt from my GitHub repo.
 <br>
 
 
 ```
 
- pip3 install selenium
+ pip3 install -r requirements.txt
 
 ```
 

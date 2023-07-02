@@ -1,4 +1,5 @@
 import logging
+import stdiomask
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -30,8 +31,7 @@ def get_user_credentials():
     username = input()
 
     # Prompt the user for the password
-    print("Enter your password:")
-    password = input()
+    password = stdiomask.getpass("Enter your password: \n",mask="*")
 
     # Set the exit flag to True to exit the listener
     # exit_flag = True

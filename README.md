@@ -13,6 +13,16 @@ Install the modules with the following command by downloading the requirements.t
  pip3 install -r requirements.txt
 
 ```
+If above command doesn't work you can install following modules manually
+
+```
+
+pip3 install selenium
+pip3 install webdriver
+pip3 install logging
+pip3 install stdiomask
+
+```
 
 You Should Have <b>Google Chrome</b> Installed In Your System. In the future, support will be added to all famous browsers.
 
@@ -27,7 +37,7 @@ python3 TIET\ Webkiosk\ Result\ Fetcher.py
 
 ![Mac Terminal Command](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Mac%20Terminal%20Command.png)
 
-![Windows Command Prompt](https://github.com/MuskanChalana/TIET-Webkiosk-Result-Fetcher/blob/MBranch/Images/Windows%20CMD%20command.png)
+![Windows Command Prompt](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Windows%20CMD%20command.png)
 
 It will prompt you for your username and password. Enter your credentials and you are good to go.
 

@@ -102,85 +102,85 @@ try:
                         "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
                     )
 
-                wait.until(
-                    EC.url_to_be(
-                        "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
-                    )
-                )
-
-                print("MARKS URL OPENED")
-
-                # prompt user for choosing the year of marks to be displayed
-
-                marks_year = wait.until(
-                    EC.element_to_be_clickable((By.XPATH, "//select[@id='exam']"))
-                )
-                marks_year_select = Select(marks_year)
-                marks_year_options = marks_year_select.options
-
-                for option in marks_year_options:
-                    print(option.text)
-                user_marks_options_choose = int(input("Choose Option: "))
-                user_marks_options_choose_text = marks_year_select.select_by_index(
-                    user_marks_options_choose - 1
-                )
-
-                show_button = wait.until(
-                    EC.element_to_be_clickable(
-                        (By.XPATH, '//input[@type="submit" and @value="Show"]')
-                    )
-                )
-                show_button.click()
-                print("Button Clicked")
-
-                table = wait.until(
-                    EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
-                )
-
-                # Find all the table rows except the first row (heading row)
-                rows = table.find_elements(By.XPATH, ".//tr")
-
-                # Iterate through the rows and print their cell values
-                with open("marks.txt", "w") as file:
-                    # Iterate over rows (excluding the heading row) and extract cell data
-                    for row in rows[1:]:
-                        cells = row.find_elements(By.TAG_NAME, "td")
-
-                        # Extract the cell data
-                        exam_code = cells[1].text.lstrip()
-                        subject_code = cells[2].text.lstrip()
-                        event_subevent = cells[3].text.lstrip()
-                        full_marks = cells[4].text.lstrip()
-                        obtained_marks = cells[5].text.lstrip()
-                        weightage = cells[6].text.lstrip()
-                        effective_marks = cells[7].text.lstrip()
-                        status = cells[8].text.lstrip()
-
-                        # Format and print the marks
-                        print(f"Exam Code: {exam_code}")
-                        print(f"Subject (Code): {subject_code}")
-                        print(f"Event/Subevent: {event_subevent}")
-                        print(f"Full Marks: {full_marks}")
-                        print(f"Obtained Marks: {obtained_marks}")
-                        print(f"Weightage: {weightage}")
-                        print(f"Effective Marks: {effective_marks}")
-                        print(f"Status: {status}")
-                        print()
-
-                        # Format the marks
-                        formatted_marks = (
-                            f"Exam Code: {exam_code}\n"
-                            f"Subject (Code): {subject_code}\n"
-                            f"Event/Subevent: {event_subevent}\n"
-                            f"Full Marks: {full_marks}\n"
-                            f"Obtained Marks: {obtained_marks}\n"
-                            f"Weightage: {weightage}\n"
-                            f"Effective Marks: {effective_marks}\n"
-                            f"Status: {status}\n\n"
+                    wait.until(
+                        EC.url_to_be(
+                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventMarksView.jsp"
                         )
+                    )
 
-                        # Write the formatted marks to the text file
-                        file.write(formatted_marks)
+                    print("MARKS URL OPENED")
+
+                    # prompt user for choosing the year of marks to be displayed
+
+                    marks_year = wait.until(
+                        EC.element_to_be_clickable((By.XPATH, "//select[@id='exam']"))
+                    )
+                    marks_year_select = Select(marks_year)
+                    marks_year_options = marks_year_select.options
+
+                    for option in marks_year_options:
+                        print(option.text)
+                    user_marks_options_choose = int(input("Choose Option: "))
+                    user_marks_options_choose_text = marks_year_select.select_by_index(
+                        user_marks_options_choose - 1
+                    )
+
+                    show_button = wait.until(
+                        EC.element_to_be_clickable(
+                            (By.XPATH, '//input[@type="submit" and @value="Show"]')
+                        )
+                    )
+                    show_button.click()
+                    print("Button Clicked")
+
+                    table = wait.until(
+                        EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
+                    )
+
+                    # Find all the table rows except the first row (heading row)
+                    rows = table.find_elements(By.XPATH, ".//tr")
+
+                    # Iterate through the rows and print their cell values
+                    with open("marks.txt", "w") as file:
+                        # Iterate over rows (excluding the heading row) and extract cell data
+                        for row in rows[1:]:
+                            cells = row.find_elements(By.TAG_NAME, "td")
+
+                            # Extract the cell data
+                            exam_code = cells[1].text.lstrip()
+                            subject_code = cells[2].text.lstrip()
+                            event_subevent = cells[3].text.lstrip()
+                            full_marks = cells[4].text.lstrip()
+                            obtained_marks = cells[5].text.lstrip()
+                            weightage = cells[6].text.lstrip()
+                            effective_marks = cells[7].text.lstrip()
+                            status = cells[8].text.lstrip()
+
+                            # Format and print the marks
+                            print(f"Exam Code: {exam_code}")
+                            print(f"Subject (Code): {subject_code}")
+                            print(f"Event/Subevent: {event_subevent}")
+                            print(f"Full Marks: {full_marks}")
+                            print(f"Obtained Marks: {obtained_marks}")
+                            print(f"Weightage: {weightage}")
+                            print(f"Effective Marks: {effective_marks}")
+                            print(f"Status: {status}")
+                            print()
+
+                            # Format the marks
+                            formatted_marks = (
+                                f"Exam Code: {exam_code}\n"
+                                f"Subject (Code): {subject_code}\n"
+                                f"Event/Subevent: {event_subevent}\n"
+                                f"Full Marks: {full_marks}\n"
+                                f"Obtained Marks: {obtained_marks}\n"
+                                f"Weightage: {weightage}\n"
+                                f"Effective Marks: {effective_marks}\n"
+                                f"Status: {status}\n\n"
+                            )
+
+                            # Write the formatted marks to the text file
+                            file.write(formatted_marks)
 
             except NoSuchElementException:
                 print(

@@ -141,7 +141,7 @@ try:
                     rows = table.find_elements(By.XPATH, ".//tr")
 
                     # Iterate through the rows and print their cell values
-                    with open("marks.txt", "w") as file:
+                    with open("marks.txt", "w") as file1:
                         # Iterate over rows (excluding the heading row) and extract cell data
                         for row in rows[1:]:
                             cells = row.find_elements(By.TAG_NAME, "td")
@@ -180,7 +180,120 @@ try:
                             )
 
                             # Write the formatted marks to the text file
-                            file.write(formatted_marks)
+                            file1.write(formatted_marks)
+
+                elif (option_choose == "cgpa" or option_choose == "sgpa"):
+                    driver.get(
+                        "https://webkiosk.thapar.edu/StudentFiles/Exam/StudCGPAReport.jsp"
+                    )
+
+                    wait.until(
+                        EC.url_to_be(
+                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudCGPAReport.jsp"
+                        )
+                    )
+
+                    print("CGPA URL OPENED")
+
+                    table = wait.until(
+                        EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
+                    )
+
+                    # Find all the table rows except the first row (heading row)
+                    rows = table.find_elements(By.XPATH, ".//tr")
+
+                    # Iterate through the rows and print their cell values
+                    with open("cgpa.txt", "w") as file2:
+                        # Iterate over rows (excluding the heading row) and extract cell data
+                        for row in rows[1:]:
+                            cells = row.find_elements(By.TAG_NAME, "td")
+
+                            # Extract the cell data
+                            exam_code = cells[0].text.lstrip()
+                            course_credit = cells[1].text.lstrip()
+                            earned_credit = cells[2].text.lstrip()
+                            points_secured = cells[3].text.lstrip()
+                            sgpa = cells[4].text.lstrip()
+                            cgpa = cells[5].text.lstrip()
+
+                            # Format and print the cgpa information
+                            print(f"Exam Code: {exam_code}")
+                            print(f"Course Credits: {course_credit}")
+                            print(f"Earned Credits: {earned_credit}")
+                            print(f"Points Secured: {points_secured}")
+                            print(f"SGPA: {sgpa}")
+                            print(f"CGPA: {cgpa}")
+                            print()
+
+                            # Format the cg info
+                            formatted_cg_info = (
+                                f"Exam Code: {exam_code}\n"
+                                f"Subject (Code): {course_credit}\n"
+                                f"Event/Subevent: {earned_credit}\n"
+                                f"Full Marks: {points_secured}\n"
+                                f"Obtained Marks: {sgpa}\n"
+                                f"Weightage: {cgpa}\n\n"
+                            )
+
+                            # Write the formatted cg info to the text file
+                            file2.write(formatted_cg_info)
+                
+
+                elif option_choose == "exam grades":
+                    driver.get(
+                        "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventGradesView.jsp"
+                    )
+
+                    wait.until(
+                        EC.url_to_be(
+                            "https://webkiosk.thapar.edu/StudentFiles/Exam/StudentEventGradesView.jsp"
+                        )
+                    )
+
+                    print("Exam Grades URL OPENED")
+
+                    table = wait.until(
+                        EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
+                    )
+
+                    # Find all the table rows except the first row (heading row)
+                    rows = table.find_elements(By.XPATH, ".//tr")
+
+                    # Iterate through the rows and print their cell values
+                    with open("grades.txt", "w") as file3:
+                        # Iterate over rows (excluding the heading row) and extract cell data
+                        for row in rows[1:]:
+                            cells = row.find_elements(By.TAG_NAME, "td")
+
+                            # Extract the cell data
+                            subject = cells[0].text.lstrip()
+                            exam_code = cells[1].text.lstrip()
+                            marks_obtained = cells[2].text.lstrip()
+                            max_marks = cells[3].text.lstrip()
+                            grade_awarded = cells[4].text.lstrip()
+                            
+
+                            # Format and print the cgpa information
+                            print(f"Subject: {subject}")
+                            print(f"Exam Code: {exam_code}")
+                            print(f"Marks Obtained: {marks_obtained}")
+                            print(f"Max. Marks: {max_marks}")
+                            print(f"Grade Awarded: {grade_awarded}")
+                            
+                            print()
+
+                            # Format the cg info
+                            formatted_grades = (
+                                f"Subject: {subject}\n"
+                                f"Exam Code: {exam_code}\n"
+                                f"Marks Obtained: {marks_obtained}\n"
+                                f"Max. Marks: {max_marks}\n"
+                                f"Grade Awarded: {grade_awarded}\n\n"
+                            )
+
+                            # Write the formatted cg info to the text file
+                            file3.write(formatted_grades)
+
 
             except NoSuchElementException:
                 print(

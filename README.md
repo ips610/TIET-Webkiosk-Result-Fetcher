@@ -57,6 +57,16 @@ It will prompt you for your username and password. Enter your credentials and yo
 
 You will be prompted for the list and you have to type your choice.
 ![Choose From CGPA, Exam Marks List](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Choose%20From%20Exam%20Marks%2C%20CGPA%20List.png)
+
+![Exam Marks](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Exam%20Marks.png)
+
+![Exam Grades](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Exam%20Grades.png)
+
+![CGPA](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/CGPA.png)
+
+![SGPA](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/SGPA.png)
+
+![Exam Marks Year Options](https://github.com/ips610/TIET-Webkiosk-Result-Fetcher/blob/main/Images/Exam%20Marks%20Option%20Choose.png)
 ## License
 
     The code in this repository is licensed under the GNU General Public Licence, Version 3.0 (the "License");

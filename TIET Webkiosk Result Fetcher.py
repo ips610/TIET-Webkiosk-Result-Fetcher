@@ -31,7 +31,7 @@ def get_user_credentials():
     username = input()
 
     # Prompt the user for the password
-    password = stdiomask.getpass("Enter your password: \n",mask="*")
+    password = stdiomask.getpass("Enter your password: \n", mask="*")
 
     # Set the exit flag to True to exit the listener
     # exit_flag = True
@@ -134,7 +134,9 @@ try:
                     print("Button Clicked")
 
                     table = wait.until(
-                        EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
+                        EC.presence_of_element_located(
+                            (By.XPATH, "//table[@id='table-1']")
+                        )
                     )
 
                     # Find all the table rows except the first row (heading row)
@@ -182,7 +184,7 @@ try:
                             # Write the formatted marks to the text file
                             file1.write(formatted_marks)
 
-                elif (option_choose == "cgpa" or option_choose == "sgpa"):
+                elif option_choose == "cgpa" or option_choose == "sgpa":
                     driver.get(
                         "https://webkiosk.thapar.edu/StudentFiles/Exam/StudCGPAReport.jsp"
                     )
@@ -196,7 +198,9 @@ try:
                     print("CGPA URL OPENED")
 
                     table = wait.until(
-                        EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
+                        EC.presence_of_element_located(
+                            (By.XPATH, "//table[@id='table-1']")
+                        )
                     )
 
                     # Find all the table rows except the first row (heading row)
@@ -237,7 +241,6 @@ try:
 
                             # Write the formatted cg info to the text file
                             file2.write(formatted_cg_info)
-                
 
                 elif option_choose == "exam grades":
                     driver.get(
@@ -253,7 +256,9 @@ try:
                     print("Exam Grades URL OPENED")
 
                     table = wait.until(
-                        EC.presence_of_element_located((By.XPATH, "//table[@id='table-1']"))
+                        EC.presence_of_element_located(
+                            (By.XPATH, "//table[@id='table-1']")
+                        )
                     )
 
                     # Find all the table rows except the first row (heading row)
@@ -271,7 +276,6 @@ try:
                             marks_obtained = cells[2].text.lstrip()
                             max_marks = cells[3].text.lstrip()
                             grade_awarded = cells[4].text.lstrip()
-                            
 
                             # Format and print the cgpa information
                             print(f"Subject: {subject}")
@@ -279,7 +283,7 @@ try:
                             print(f"Marks Obtained: {marks_obtained}")
                             print(f"Max. Marks: {max_marks}")
                             print(f"Grade Awarded: {grade_awarded}")
-                            
+
                             print()
 
                             # Format the cg info
@@ -293,7 +297,6 @@ try:
 
                             # Write the formatted cg info to the text file
                             file3.write(formatted_grades)
-
 
             except NoSuchElementException:
                 print(

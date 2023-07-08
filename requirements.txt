@@ -1,3 +1,2 @@
 selenium==3.141.0
-webdriver==3.141.0
-stdiomask==0.0.7
+stdiomask==0.0.6

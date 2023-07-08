@@ -18,7 +18,6 @@ If above command doesn't work you can install following modules manually
 ```
 
 pip3 install selenium
-pip3 install webdriver
 pip3 install logging
 pip3 install stdiomask
 

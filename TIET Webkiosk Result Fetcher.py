@@ -327,3 +327,7 @@ finally:
     # Clean up resources
     driver.quit()
     logger.info("Driver quit. Exiting the program.")
+
+
+#todo
+#while loop integration and exit with -1

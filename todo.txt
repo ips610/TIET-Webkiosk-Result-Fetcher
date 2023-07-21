@@ -1,0 +1,25 @@
+Marks store in sheets
+Send it on mail whenever it updates
+Frontend website
+
+Sign Up Page — 
+1. Login ( roll no )
+2. Password - change pass
+3. Mail id - Thapar
+4. WhatsApp no
+
+Login Page —
+1. Password Change
+2. Email Change
+3. Phone no change
+4. Delete Account
+
+
+
+Firebase - google 
+
+
+Backend — flask — python
+
+UI - UX
+

@@ -21,7 +21,7 @@ client = gspread.authorize(creds)
 
 # Open the Google Sheets spreadsheet by its title
 spreadsheet = client.open("Testing Sheets")
-
+print("Sheet Found")
 # Select the worksheet by its title
 worksheet = spreadsheet.worksheet("Sheet1")
 
@@ -31,3 +31,9 @@ data = worksheet.get_all_values()
 # Print the data
 for row in data:
     print(row)
+
+'''
+pip3 install google-auth-oauthlib
+pip3 install gspread
+pip3 install gspread oauth2client
+'''

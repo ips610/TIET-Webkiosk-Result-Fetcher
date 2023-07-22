@@ -15,7 +15,7 @@ scope = [
     "https://www.googleapis.com/auth/drive",
 ]
 creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "tiet-result-fetcher-9ca30d1cd812.json", scope
+    "IPS.json", scope
 )
 client = gspread.authorize(creds)
 
@@ -27,6 +27,10 @@ worksheet = spreadsheet.worksheet("Sheet1")
 
 # Read data from the worksheet
 data = worksheet.get_all_values()
+
+# sh = client.create('A new spreadsheet')
+# print("DONE")
+# sh.share('ishpuneetsingh6@gmail.com', perm_type='user', role='writer')
 
 # Print the data
 for row in data:

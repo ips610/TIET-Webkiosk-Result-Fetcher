@@ -8,6 +8,8 @@ Sign Up Page —
 3. Mail id - Thapar
 4. WhatsApp no
 
+Mail ID & Password --> Webkiosk Roll NO & Password , WhatsApp No
+
 Login Page —
 1. Password Change
 2. Email Change

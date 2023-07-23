@@ -149,6 +149,7 @@ try:
                             cells = row.find_elements(By.TAG_NAME, "td")
 
                             # Extract the cell data
+                            sr_no = cells[0].text.lstrip()
                             exam_code = cells[1].text.lstrip()
                             subject_code = cells[2].text.lstrip()
                             event_subevent = cells[3].text.lstrip()
@@ -159,6 +160,7 @@ try:
                             status = cells[8].text.lstrip()
 
                             # Format and print the marks
+                            print(f"Sr No: {sr_no}")
                             print(f"Exam Code: {exam_code}")
                             print(f"Subject (Code): {subject_code}")
                             print(f"Event/Subevent: {event_subevent}")
@@ -171,6 +173,7 @@ try:
 
                             # Format the marks
                             formatted_marks = (
+                                f"Sr No: {sr_no}\n"
                                 f"Exam Code: {exam_code}\n"
                                 f"Subject (Code): {subject_code}\n"
                                 f"Event/Subevent: {event_subevent}\n"

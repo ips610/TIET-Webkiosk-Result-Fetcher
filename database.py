@@ -30,30 +30,30 @@ print("DONE")
 
 
 
-# def sign_in_with_email_and_password(email, password, phone_number, roll_number):
-#     try:
-#         # Sign in the user with email and password
-#         user = auth.get_user_by_email(email)
-#         # You can also verify the password by calling auth.verify_password() method
-#         # auth.verify_password(user.uid, password)
+def sign_in_with_email_and_password(email, password):
+    try:
+        # Sign in the user with email and password
+        user = auth.get_user_by_email(email)
+        # You can also verify the password by calling auth.verify_password() method
+        # auth.verify_password(user.uid, password)
 
-#         # If successful, return the user UID
-#         return user.uid
-#     except auth.AuthError as e:
-#         # Handle sign-in errors
-#         error_code = e.code
-#         error_message = e.message
-#         print("Sign-in error:", error_code, "-", error_message)
-#         return None
+        # If successful, return the user UID
+        return user.uid
+    except auth.AuthError as e:
+        # Handle sign-in errors
+        error_code = e.code
+        error_message = e.message
+        print("Sign-in error:", error_code, "-", error_message)
+        return None
 
-# # Example usage:
-# email = "user@example.com"
-# password = "user_password"
-# user_id = sign_in_with_email_and_password(email, password)
-# if user_id:
-#     print(f"User signed in successfully. UID: {user_id}")
-# else:
-#     print("Sign-in failed.")
+# Example usage:
+email = "new_user@example.com"
+password = "new_user_password"
+user_id = sign_in_with_email_and_password(email, password)
+if user_id:
+    print(f"User signed in successfully. UID: {user_id}")
+else:
+    print("Sign-in failed.")
 
 
 def sign_up_with_email_and_password(email, password, phone_number, roll_number):

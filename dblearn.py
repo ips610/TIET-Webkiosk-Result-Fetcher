@@ -1,6 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
-
+import json
 
 
 cred = credentials.Certificate("./ru.json")
@@ -18,12 +18,22 @@ default_app = firebase_admin.initialize_app(
 )
 db = firestore.client(default_app)
 
-document = db.collection('test').document('testing')
-document.set({
-    'first child': {
-        'name': 'John Doe',
-        'age': 30
-        }
-    })
+collection = db.collection('test')
+# document.set({
+#     'first child': {
+#         'name': 'John Doe',
+#         'age': 30
+#         }
+#     })
 
+with open("marks_converted.json", "r") as f:
+    data = json.load(f)
+    
+for item in data:
+    # Convert the dictionary to a Firestore document
+    doc = {key: value for key, value in item.items()}
+
+    # Add the document to the collection
+    collection.add(doc)
+    
 print("Done")

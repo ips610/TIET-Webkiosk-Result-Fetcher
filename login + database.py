@@ -1,6 +1,7 @@
 import json
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, auth
+from firebase_admin import firestore
 # from firebase_auth import Auth
 
 def connection_with_firebase():
@@ -49,11 +50,7 @@ def sign_in_with_email_and_password(email, password):
     global user_uid
     try:
         # Sign in the user with email and password
-        user = auth.get_user_by_email(email)
-        # You can also verify the password by calling auth.verify_password() method
-        # auth.verify_password(user.uid, password)
-
-        # If successful, return the user UID
+        user = auth.sign_in_with_email_and_password(email, password)
         user_uid=user.uid
         return user.uid
     except Exception as e:
@@ -75,9 +72,48 @@ def entering_marks_in_firebase():
         collection.add(doc)
     print("Marks Entered")
     
+    
+def get_user_details(user_uid):
+    try:
+        # Get the user details from the Firebase database
+        db = firestore.client()
+        # Create a reference to the "Marks Records" collection for the specific user
+        marks_collection_ref = db.collection("users").document(user_uid).collection("Marks Records")
+
+        # Query all documents from the collection
+        marks_records = marks_collection_ref.get()
+
+        # Sort the documents based on the "sr no" value inside each document
+        sorted_marks_records = sorted(marks_records, key=lambda doc: doc.to_dict().get("sr no", 0))
+        
+        return [doc.to_dict() for doc in marks_records]
+
+        # Check if the document exists
+        if user_data.exists:
+            # Return the user details as a dictionary
+            return user_data.to_dict()
+        else:
+            # Handle the case when the user does not exist
+            return None
+    except Exception as e:
+        # Handle any other exceptions that may occur during the retrieval
+        print("Error fetching user details:", e)
+        return None
+
+
 print("Done")
+
+
+
 if __name__ == "__main__":
+    
     connection_with_firebase()
     # sign_up_with_email_and_password(email, password, phone_number, roll_number)
     # sign_in_with_email_and_password('new_user@example.com','new_user_password')
-    entering_marks_in_firebase()
+    # entering_marks_in_firebase()
+    user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+    print(len(user_details))
+    for i in user_details:
+        
+        print(i)
+        print()

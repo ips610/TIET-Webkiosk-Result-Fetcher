@@ -57,6 +57,7 @@ def sign_in_with_email_and_password(email, password):
         # Handle all other errors
         print(f"Error: {e}")
 
+
 def entering_marks_in_firebase():
     
     with open("marks_converted.json", "r") as f:
@@ -101,19 +102,21 @@ def get_user_details(user_uid):
         return None
 
 
-print("Done")
-
-
 
 if __name__ == "__main__":
     
     connection_with_firebase()
+    
     # sign_up_with_email_and_password(email, password, phone_number, roll_number)
+    
     # sign_in_with_email_and_password('new_user@example.com','new_user_password')
+    
     # entering_marks_in_firebase()
+    
     user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+    
     print(len(user_details))
+    
     for i in user_details:
-        
         print(i)
         print()

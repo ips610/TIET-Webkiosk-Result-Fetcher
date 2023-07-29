@@ -46,16 +46,17 @@ def sign_up_with_email_and_password(email, password, phone_number, roll_number):
         return False
 
 
-def sign_in_with_email_and_password(email, password):
-    global user_uid
-    try:
-        # Sign in the user with email and password
-        user = auth.sign_in_with_email_and_password(email, password)
-        user_uid=user.uid
-        return user.uid
-    except Exception as e:
-        # Handle all other errors
-        print(f"Error: {e}")
+# async def sign_in_with_email_and_password(email, password):
+#     global user_uid
+#     try:
+#         # Sign in the user with email and password
+#         credential = auth.EmailAuthProviderAsync.credential_from_email_password(email, password)
+#         user = await auth.sign_in_with_credential_async(credential)
+#         user_uid = user.uid
+#         return user_uid
+#     except Exception as e:
+#         # Handle all other errors
+#         print(f"Error: {e}")
 
 
 def entering_marks_in_firebase():
@@ -102,6 +103,10 @@ def get_user_details(user_uid):
         return None
 
 
+# async def main():
+#     user_uid = await sign_in_with_email_and_password('new_user@example.com','new_user_password')
+#     print(user_uid)
+    
 
 if __name__ == "__main__":
     
@@ -109,7 +114,7 @@ if __name__ == "__main__":
     
     # sign_up_with_email_and_password(email, password, phone_number, roll_number)
     
-    # sign_in_with_email_and_password('new_user@example.com','new_user_password')
+    # print(sign_in_with_email_and_password('new_user@example.com','new_user_password'))
     
     # entering_marks_in_firebase()
     
@@ -120,3 +125,6 @@ if __name__ == "__main__":
     for i in user_details:
         print(i)
         print()
+    
+    
+    # main()

@@ -99,7 +99,7 @@ def get_user_details(user_uid):
         marks_records = marks_collection_ref.get()
 
         # Sort the documents based on the "sr no" value inside each document
-        sorted_marks_records = sorted(marks_records, key=lambda doc: doc.to_dict().get("sr no", 0))
+        sorted_marks_records = sorted(marks_records, key=lambda doc: doc.to_dict().get("Sr No", 0))
         
         return [doc.to_dict() for doc in marks_records]
 

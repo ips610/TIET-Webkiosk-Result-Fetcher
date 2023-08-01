@@ -64,14 +64,20 @@ def entering_marks_in_firebase():
     with open("marks_converted.json", "r") as f:
         data = json.load(f)
     
+    
+    
     for item in data:
         # Convert the dictionary to a Firestore document
         doc = {key: value for key, value in item.items()}
 
-        # Add the document to the collection
-        main_collection=db.collection('users').document('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
-        collection=main_collection.collection("Marks Records")
-        collection.add(doc)
+        # Get the Sr. No. from the document and use it as the document ID
+        sr_no = doc.get('Sr No')  # Replace 'Sr. No.' with the actual key in the dictionary
+
+        # Add the document to the collection using the Sr. No. as the document ID
+        main_collection = db.collection('users').document('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+        collection = main_collection.collection("Marks Records")
+        collection.document(sr_no).set(doc)
+        
     print("Marks Entered")
     
     
@@ -116,15 +122,15 @@ if __name__ == "__main__":
     
     # print(sign_in_with_email_and_password('new_user@example.com','new_user_password'))
     
-    # entering_marks_in_firebase()
+    entering_marks_in_firebase()
     
-    user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+    # user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
     
-    print(len(user_details))
+    # print(len(user_details))
     
-    for i in user_details:
-        print(i)
-        print()
+    # for i in user_details:
+    #     print(i)
+    #     print()
     
     
     # main()

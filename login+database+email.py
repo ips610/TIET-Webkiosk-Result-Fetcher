@@ -2,6 +2,12 @@ import json
 import firebase_admin
 from firebase_admin import credentials, auth
 from firebase_admin import firestore
+import smtplib
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+from email.message import EmailMessage
+
 # from firebase_auth import Auth
 
 def connection_with_firebase():
@@ -78,6 +84,7 @@ def entering_marks_in_firebase():
         collection = main_collection.collection("Marks Records")
         collection.document(sr_no).set(doc)
         
+    send_email()
     print("Marks Entered")
     
     
@@ -113,19 +120,56 @@ def get_user_details(user_uid):
 #     user_uid = await sign_in_with_email_and_password('new_user@example.com','new_user_password')
 #     print(user_uid)
     
+    
+def send_email():
+    dotenv_path = Path("./.env")
+    load_dotenv(dotenv_path=dotenv_path)
+    PASSWORD = os.getenv("PASSWORD")
+
+    # Create SMTP session
+    s = smtplib.SMTP("smtp.gmail.com", 587)
+
+    # Start TLS for security
+    s.starttls()
+
+    # Authentication
+    EMAIL_ADDRESS = "no.reply.result.update@gmail.com"  # Replace with your email address
+    s.login(EMAIL_ADDRESS, PASSWORD)
+
+    # Create an EmailMessage object
+    msg = EmailMessage()
+    msg["From"] = EMAIL_ADDRESS
+    msg["To"] = "ishpuneetsingh6@gmail.com"  # Replace with the recipient's email address
+    msg["Subject"] = "Result Update"  # Add the subject to the email
+
+    # Set the email body
+    msg.set_content("There is change in your marks on webkiosk")
+
+    # Sending the email
+    s.send_message(msg)
+    print("Email sent successfully!")
+
+    # Terminate the session
+    s.quit()
+
 
 if __name__ == "__main__":
     
     connection_with_firebase()
     
-    sign_up_with_email_and_password('newuser9090@example.com', '562389', '456123', '102203274')
+    # sign_up_with_email_and_password(email, password, phone_number, roll_number)
     
     # print(sign_in_with_email_and_password('new_user@example.com','new_user_password'))
     
-    entering_marks_in_firebase()
-    
-    # user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
-    
+    # entering_marks_in_firebase()
+    with open("marks_converted.json", "r") as f:
+        data = json.load(f)
+        
+    user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+    if len(user_details)<len(data):
+        entering_marks_in_firebase()
+    else:
+        print("No New Record Found")
     # print(len(user_details))
     
     # for i in user_details:

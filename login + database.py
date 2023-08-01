@@ -112,19 +112,19 @@ if __name__ == "__main__":
     
     connection_with_firebase()
     
-    # sign_up_with_email_and_password(email, password, phone_number, roll_number)
+    sign_up_with_email_and_password('newuser9090@example.com', '562389', '456123', '102203274')
     
     # print(sign_in_with_email_and_password('new_user@example.com','new_user_password'))
     
     # entering_marks_in_firebase()
     
-    user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+    # user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
     
-    print(len(user_details))
+    # print(len(user_details))
     
-    for i in user_details:
-        print(i)
-        print()
+    # for i in user_details:
+    #     print(i)
+    #     print()
     
     
     # main()

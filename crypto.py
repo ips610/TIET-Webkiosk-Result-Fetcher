@@ -13,7 +13,6 @@ print(key)
 # Instance the Fernet class with the key
 
 fernet = Fernet(key)
-
 # then use the Fernet class instance
 # to encrypt the string string must
 # be encoded to byte string before encryption

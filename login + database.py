@@ -4,11 +4,9 @@ from firebase_admin import credentials, auth
 from firebase_admin import firestore
 # from firebase_auth import Auth
 
-def connection_with_firebase():
-    global db
-    cred = credentials.Certificate("./ru.json")
+cred = credentials.Certificate("./ru.json")
 
-    default_app = firebase_admin.initialize_app(
+default_app = firebase_admin.initialize_app(
         cred,
         {
             "apiKey": "AIzaSyB3EDMY_ANLh6vqC_LwhLmLhbw_okePfjo",
@@ -20,6 +18,10 @@ def connection_with_firebase():
             "measurementId": "G-7LKBG4GB93",
         },
     )
+
+def connection_with_firebase():
+    global db
+    
     db = firestore.client(default_app)
     print("Connected With Firebase")
 
@@ -58,13 +60,39 @@ def sign_up_with_email_and_password(email, password, phone_number, roll_number):
 #         # Handle all other errors
 #         print(f"Error: {e}")
 
+# Function for signing in with email and password
+def sign_in_with_email_and_password(email, password):
+    try:
+        # Sign in the user with email and password
+        user = auth.get_user_by_email(email)  # Fetch the user's data
+        user_uid = user.uid
+
+        # Sign in the user
+        auth_user = auth.get_user(user_uid)
+
+        # Authenticate the user using their email and password
+        auth_user = auth.update_user(
+            user_uid,
+            email=email,
+            password=password,
+        )
+
+        # Return the user UID if authentication is successful
+        return auth_user.uid
+
+    except auth.AuthError as e:
+        # Handle sign-in errors
+        error_code = e.code
+        error_message = e.detail
+
+        print("Sign-in error:", error_code, "-", error_message)
+        return None
+
 
 def entering_marks_in_firebase():
     
     with open("marks_converted.json", "r") as f:
         data = json.load(f)
-    
-    
     
     for item in data:
         # Convert the dictionary to a Firestore document
@@ -74,10 +102,9 @@ def entering_marks_in_firebase():
         sr_no = doc.get('Sr No')  # Replace 'Sr. No.' with the actual key in the dictionary
 
         # Add the document to the collection using the Sr. No. as the document ID
-        main_collection = db.collection('users').document('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+        main_collection = db.collection('users').document('fYHjyQ6st0Uq4YKjpsv6Zk5qoup1')
         collection = main_collection.collection("Marks Records")
         collection.document(sr_no).set(doc)
-        
     print("Marks Entered")
     
     
@@ -118,19 +145,30 @@ if __name__ == "__main__":
     
     connection_with_firebase()
     
-    sign_up_with_email_and_password('newuser9090@example.com', '562389', '456123', '102203274')
+    # Call your sign-up function if needed
+    # sign_up_with_email_and_password(email, password, phone_number, roll_number)
     
-    # print(sign_in_with_email_and_password('new_user@example.com','new_user_password'))
+    # Call the sign-in function
+    email = "new_user@example.com"
+    password = "new_user_password"
+    user_uid = sign_in_with_email_and_password(email, password)
     
-    entering_marks_in_firebase()
+    if user_uid:
+        print("User signed in with UID:", user_uid)
+        
+        # Perform other operations after signing in
+        entering_marks_in_firebase()
+        
+        user_details = get_user_details(user_uid)
+        
+        print(len(user_details))
+        
+        for i in user_details:
+            print(i)
+            print()
     
-    # user_details = get_user_details('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
-    
-    # print(len(user_details))
-    
-    # for i in user_details:
-    #     print(i)
-    #     print()
-    
+    else:
+        print("Sign-in failed.")
+
     
     # main()

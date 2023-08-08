@@ -7,6 +7,7 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 from email.message import EmailMessage
+from cryptography.fernet import Fernet
 
 # from firebase_auth import Auth
 
@@ -64,28 +65,52 @@ def sign_up_with_email_and_password(email, password, phone_number, roll_number):
 #         # Handle all other errors
 #         print(f"Error: {e}")
 
+def get_or_generate_key(user_uid):
+    key_present = db.collection("users").document(user_uid).get().to_dict()
+
+    if 'token' in key_present:
+        return key_present['token']
+    else:
+        key = Fernet.generate_key()
+        key_str = key.decode()
+
+        # Store the generated key under the user UID in Firebase
+        db.collection("users").document(user_uid).set({'token': key_str})
+        
+        return key_str
+
+def encrypt_dict_values(data_dict, fernet):
+    encrypted_dict = {}
+    for key, value in data_dict.items():
+        if key == 'Sr No':  # Do not encrypt 'Sr No'
+            encrypted_dict[key] = value
+        elif isinstance(value, str):
+            encrypted_value = fernet.encrypt(value.encode())
+            encrypted_dict[key] = encrypted_value.decode()
+        else:
+            encrypted_dict[key] = value
+    return encrypted_dict
 
 def entering_marks_in_firebase():
-    
     with open("marks_converted.json", "r") as f:
         data = json.load(f)
-    
-    
-    
+
     for item in data:
-        # Convert the dictionary to a Firestore document
-        doc = {key: value for key, value in item.items()}
-
-        # Get the Sr. No. from the document and use it as the document ID
-        sr_no = doc.get('Sr No')  # Replace 'Sr. No.' with the actual key in the dictionary
-
-        # Add the document to the collection using the Sr. No. as the document ID
+        encrypted_doc = get_or_generate_key('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+        sr_no = item.get('Sr No')
+        
         main_collection = db.collection('users').document('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
         collection = main_collection.collection("Marks Records")
-        collection.document(sr_no).set(doc)
+
+        fernet = Fernet(encrypted_doc)
+
+        encrypted_content = encrypt_dict_values(item, fernet)
+
+        collection.document(sr_no).set(encrypted_content)
         
     send_email()
     print("Marks Entered")
+
     
     
 def get_user_details(user_uid):

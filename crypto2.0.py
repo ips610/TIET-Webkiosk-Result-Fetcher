@@ -1,34 +1,36 @@
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import padding
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives import padding as symmetric_padding
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from Crypto.Cipher import AES
+import hashlib
+import binascii
 
-# Key generation using PBKDF2HMAC
-password = b"mysecretpassword"
-salt = b"secretsalt"
-kdf = PBKDF2HMAC(
-    algorithm=hashes.SHA256(),
-    iterations=100000,
-    salt=salt,
-    length=32,  # AES-256 requires a 256-bit key
-)
+def derive_key(secretKey):
+    # Use SHA-256 to derive a 256-bit (32-byte) key from the provided key
+    key_derived = hashlib.sha256(secretKey).digest()
+    return key_derived
 
-key = kdf.derive(password)
+def encrypt_AES_GCM(msg, secretKey):
+    aesCipher = AES.new(secretKey, AES.MODE_GCM)
+    ciphertext, authTag = aesCipher.encrypt_and_digest(msg)
+    return (ciphertext, aesCipher.nonce, authTag)
 
-# Encryption using AES
-cipher = Cipher(algorithms.AES(key), modes.CFB8(iv=b"initialization_vector"), backend=default_backend())
-encryptor = cipher.encryptor()
+def decrypt_AES_GCM(encryptedMsg, secretKey):
+    (ciphertext, nonce, authTag) = encryptedMsg
+    aesCipher = AES.new(secretKey, AES.MODE_GCM, nonce)
+    plaintext = aesCipher.decrypt_and_verify(ciphertext, authTag)
+    return plaintext
 
-data = b"Hello, world!"
-encrypted_data = encryptor.update(data) + encryptor.finalize()
+# Replace this with your own secret key
+secretKey = b'7CuCmt3kZYdc1NurpLVnWDe6tPf1'
 
-# Decryption using AES
-decryptor = cipher.decryptor()
-decrypted_data = decryptor.update(encrypted_data) + decryptor.finalize()
+# Derive a 256-bit key from the input secret key
+derivedSecretKey = derive_key(secretKey)
+print(derivedSecretKey)
+msg = b'Message for AES-256-GCM encryption'
+encryptedMsg = encrypt_AES_GCM(msg, derivedSecretKey)
+print("encryptedMsg", {
+    'ciphertext': binascii.hexlify(encryptedMsg[0]),
+    'aesIV': binascii.hexlify(encryptedMsg[1]),
+    'authTag': binascii.hexlify(encryptedMsg[2])
+})
 
-print("Original Data:", data)
-print("Encrypted Data:", encrypted_data)
-print("Decrypted Data:", decrypted_data)
+decryptedMsg = decrypt_AES_GCM(encryptedMsg, derivedSecretKey)
+print("decryptedMsg", decryptedMsg)

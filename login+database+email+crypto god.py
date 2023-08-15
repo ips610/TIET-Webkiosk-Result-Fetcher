@@ -56,17 +56,7 @@ def sign_up_with_email_and_password(email, password, phone_number, roll_number):
         return False
 
 
-# async def sign_in_with_email_and_password(email, password):
-#     global user_uid
-#     try:
-#         # Sign in the user with email and password
-#         credential = auth.EmailAuthProviderAsync.credential_from_email_password(email, password)
-#         user = await auth.sign_in_with_credential_async(credential)
-#         user_uid = user.uid
-#         return user_uid
-#     except Exception as e:
-#         # Handle all other errors
-#         print(f"Error: {e}")
+
 
 def get_or_generate_key(user_uid):
     key_present = db.collection("users").document(user_uid).get().to_dict()
@@ -175,10 +165,7 @@ def get_user_details(user_uid):
         return None
 
 
-# async def main():
-#     user_uid = await sign_in_with_email_and_password('new_user@example.com','new_user_password')
-#     print(user_uid)
-    
+
     
 def send_email():
     dotenv_path = Path("./.env")

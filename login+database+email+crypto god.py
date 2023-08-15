@@ -65,16 +65,17 @@ def get_or_generate_key(user_uid):
         return key_present['token']
     else:
         key = Fernet.generate_key()
-        key_str = key.decode()
+        token = key.decode()
 
         # Store the generated key under the user UID in Firebase
-        db.collection("users").document(user_uid).set({'token': key_str})
+        db.collection("users").document(user_uid).set({'token': token})
         
-        return key_str
+        return token
 
 def derive_key(secretKey):
     # Use SHA-256 to derive a 256-bit (32-byte) key from the provided key
-    key_derived = hashlib.sha256(secretKey).digest()
+
+    key_derived = hashlib.sha256(secretKey.encode()).digest()
     return key_derived
 
 def encrypt_AES_GCM(msg, secretKey):
@@ -110,25 +111,23 @@ def double_decrypt(encrypted_aes, aes_key, fernet_key):
 
     return decrypted_message
 
-def hashing(message, fernet):
-    pass
 
 def entering_marks_in_firebase():
     with open("marks_converted.json", "r") as f:
         data = json.load(f)
 
     for item in data:
-        encrypted_doc = get_or_generate_key('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
+        token = get_or_generate_key('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
         sr_no = item.get('Sr No')
         
         main_collection = db.collection('users').document('7CuCmt3kZYdc1NurpLVnWDe6tPf1')
         collection = main_collection.collection("Marks Records")
 
-        fernet = Fernet(encrypted_doc)
+        fernet = Fernet(token)
         secretKey='7CuCmt3kZYdc1NurpLVnWDe6tPf1'      
-        derive_key(secretKey)
+        salting_key = derive_key(secretKey)
 
-        encrypted_content = encrypt_dict_values(item, fernet)
+        encrypted_content = double_decrypt(item, fernet, salting_key)
 
         collection.document(sr_no).set(encrypted_content)
         

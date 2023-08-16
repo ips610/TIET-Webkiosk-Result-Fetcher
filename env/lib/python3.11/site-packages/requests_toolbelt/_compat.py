@@ -41,6 +41,14 @@ else:
     except ImportError:
         from urllib3.util import timeout
 
+if requests.__build__ < 0x021000:
+    gaecontrib = None
+else:
+    try:
+        from requests.packages.urllib3.contrib import appengine as gaecontrib
+    except ImportError:
+        from urllib3.contrib import appengine as gaecontrib
+
 PY3 = sys.version_info > (3, 0)
 
 if PY3:
@@ -298,5 +306,6 @@ __all__ = (
     'HTTPHeaderDict',
     'queue',
     'urlencode',
+    'gaecontrib',
     'urljoin',
 )

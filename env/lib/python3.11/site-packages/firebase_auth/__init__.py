@@ -1,0 +1,1 @@
+from .firebase_auth import initialize_app

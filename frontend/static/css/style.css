@@ -136,6 +136,7 @@ body {
   margin-top: 5rem;
   border: none;
   margin-right: 5rem;
+  cursor: pointer;
 }
 #hero_loginbtn {
   margin-right: 5rem;
@@ -193,25 +194,40 @@ body {
   height: 25.06425rem;
   transform: rotate(0.17deg);
   flex-shrink: 0;
-  left: 25rem;
-  top: 65rem;
-  opacity: 0.7;
+  left: 15rem;
+  top: 60rem;
+  opacity: 0.5;
 }
 .ourmission_blob_two {
   width: 21.35525rem;
   height: 20.58056rem;
   flex-shrink: 0;
   left: 35rem;
-  top: 65rem;
-  opacity: 0.75;
+  top: 60rem;
+
 }
 .ourmission_blob_three {
   width: 48.25rem;
   height: 47.5rem;
   flex-shrink: 0;
-  position: relative;
   margin-left: 0;
   padding-left: 0;
-  left:-1rem;
-  opacity: 0.25;
+  left:1rem;
+
+}
+
+.contactus{
+    display: flex;
+    position: relative;
+    padding: 100px 192px;
+    border-top: 1px solid #999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.contactus_content{
+    width: 1056px;
+    height: 320px;
 }

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -47,8 +47,11 @@
             you informed about any changes to your academic records – because your success is our priority.
         </div>
         <div class="signin_login_btn">
-            <button class="herobtn" id="hero_loginbtn">Login</button>
-            <button class="herobtn" id="hero_signupbtn">Sign Up</button>
+
+            <button class="herobtn" id="hero_loginbtn" onclick="location.href='/login'" target="blank">Login</button>
+
+            <button class="herobtn" id="hero_signupbtn" onclick="location.href='/signup'" target="blank">Sign Up</button>
+
         </div>
     </div>
 </div>
@@ -56,7 +59,7 @@
 
 <img src="{{ url_for('static', filename='ourmission_blob_two.png') }}" alt="Image" class="ourmission_blob_two ourmission_img">
 
-<img src="{{ url_for('static', filename='ourmission_blob_three.png') }}" alt="Image" class="hourmission_blob_three ourmission_img">
+<img src="{{ url_for('static', filename='ourmission_blob_three.png') }}" alt="Image" class="ourmission_blob_three ourmission_img">
 <div class="ourmission">
     <div class="ourmission_heading">
         OUR <br> MISSION
@@ -68,5 +71,16 @@
         equipped with the timely information they need to excel.
     </div>
 </div>
+<div class="faqs">
 
+</div>
+
+<div class="aboutus">
+
+</div>
+<div class="contactus">
+    <div class="contactus_content">
+
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.signup{
+    width: 100vw;
+    height: 100vh;
+    background: #141619;
+}

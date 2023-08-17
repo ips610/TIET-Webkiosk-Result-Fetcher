@@ -135,7 +135,6 @@ body {
   margin-top: 5rem;
   border: none;
   margin-right: 5rem;
-
 }
 #hero_loginbtn {
   margin-right: 5rem;
@@ -159,11 +158,58 @@ body {
   display: inline-block;
   top: 20rem;
 }
-.ourmission{
-    display: inline-flex;
-    padding: 284px 254px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.ourmission {
+  display: flex;
+  padding: 17.75rem 15.875rem;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.ourmission_heading {
+  color: #fff;
+  font-family: Inter;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 78px;
+}
+.ourmission_text {
+  width: 505.669px;
+  color: #e5e5e5;
+  font-family: Inter;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: justify;
+}
+.ourmission_img {
+  position: absolute;
+  display: inline-block;
+}
+.ourmission_blob_one {
+  width: 35.44363rem;
+  height: 25.06425rem;
+  transform: rotate(0.17deg);
+  flex-shrink: 0;
+  left: 20rem;
+  top: 60rem;
+  opacity: 0.7;
+}
+.ourmission_blob_two {
+  width: 21.35525rem;
+  height: 20.58056rem;
+  flex-shrink: 0;
+  left: 40rem;
+  top: 60rem;
+}
+.ourmission_blob_three {
+  width: 48.25rem;
+  height: 47.5rem;
+  flex-shrink: 0;
+  position: relative;
+  margin-left: 0;
+  padding-left: 0;
+  left:-1rem;
+  opacity: 0.25;
 }

@@ -62,6 +62,13 @@ margin-right: 2rem;
     z-index: 5;
 }
 
+.signup_email_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #signup_email_content_label{
     color: #A4A4A4;
     font-family: Poppins;
@@ -69,14 +76,16 @@ margin-right: 2rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    align-self: flex-start;
 }
 
 .signup_email_content_input{
-    width: 397px;
+    width: 75%;
     height: 55px;
     border-radius: 8px;
     background: url("frontend/static/signup_email_pic.png"), lightgray 0% 0% / 23.434971272945404px 23.434971272945404px repeat, radial-gradient(151.92% 127.02% at 15.32% 21.04%, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.04) 77.08%, rgba(255, 255, 255, 0.00) 100%);
     background-blend-mode: overlay, normal;
     flex-shrink: 0;
     backdrop-filter: blur(6.0781121253967285px);
+
 }

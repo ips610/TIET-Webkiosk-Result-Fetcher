@@ -1,9 +1,86 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
-.signup{
-    width: 100vw;
-    height: 100vh;
-    background: #141619;
+.signup {
+  width: 100vw;
+  height: 100vh;
+  background: #141619;
 }
+
+.signup_data {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signup_left {
+  width: 973.176px;
+  height: 1000.703px;
+  flex-shrink: 0;
+}
+
+.signup_right_content {
+  width: 38rem;
+  height: 36.5rem;
+  border-radius: 40px;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(
+    149deg,
+    rgba(156, 63, 228, 0.27) 0%,
+    rgba(255, 130, 175, 0.05) 100%
+  );
+  flex-shrink: 0;
+}
+.signup_right_content_box {
+  fill: linear-gradient(
+    149deg,
+    rgba(253, 209, 157, 0.27) 1.66%,
+    rgba(252, 129, 173, 0.05) 100%
+  );
+  width: 33.8257rem;
+  height: 32.4906rem;
+  flex-shrink: 0;
+  filter: blur(25px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signup_right_content_heading {
+  color: #efefef;
+  font-family: Poppins;
+  font-size: 40.329px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  z-index: 1;
+}
+
+#signup_email_label {
+  color: #a4a4a4;
+  font-family: Poppins;
+  font-size: 14.33px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#email {
+  width: 397px;
+  height: 55px;
+  border-radius: 8px;
+  background: url(<path-to-image>), lightgray 0% 0% / 23.434971272945404px 23.434971272945404px repeat, radial-gradient(151.92% 127.02% at 15.32% 21.04%, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.04) 77.08%, rgba(255, 255, 255, 0.00) 100%);
+  background-blend-mode: overlay, normal;
+  flex-shrink: 0;
+  backdrop-filter: blur(6.0781121253967285px);
+}
+/* ::placeholder {
+  width: 212.408px;
+  color: #a4a4a4;
+  font-family: Poppins;
+  font-size: 14.33px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+} */

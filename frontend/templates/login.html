@@ -1,9 +1,96 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_login.css') }}">
 {% endblock %}
 
 {% block body %}
+<div class="login">
+    <div class="login_data">
 
-{% endblock %}
+        <div class="login_right">
+
+            <div class="login_right_content">
+
+                <div class="login_right_content_heading">
+                    Welcome Back!
+                </div>
+                <div class="login_right_content_sub_heading">
+                    <div class="login_right_content_sub_heading_text">
+                        Welcome Back We Missed You
+                    </div>
+                </div>
+
+
+
+                <div class="login_email_content">
+                    <div class="login_label">
+                        <label for="email" id="login_email_content_label">Username</label>
+                    </div>
+
+
+
+
+
+                    <div class="login_input_email">
+
+                        <input type="email" id="email" name="email" placeholder="yourname@gmail.com"
+                            class="login_email_content_input">
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+                
+
+
+
+
+                <div class="login_email_content">
+                    <div class="login_label">
+                        <label for="password" id="login_email_content_label">Password</label>
+                    </div>
+
+
+
+
+                    <div class="login_input_email">
+
+                        <input type="password" id="password" name="password" placeholder="........"
+                            class="login_email_content_input">
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="login_email_content">
+
+
+
+
+
+                    <div class="login_input_email login_btn">
+
+                        <button class="login_btn_text">
+                            Sign In
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <img src="{{ url_for('static', filename='login_img.png') }}" alt="Image" class="login_left">
+    </div>
+    {% endblock %}

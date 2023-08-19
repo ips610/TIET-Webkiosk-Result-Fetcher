@@ -19,7 +19,6 @@
 .signup_left {
   width: 60.8235rem;
   height: 62.5439rem;
-
 }
 
 .signup_right {
@@ -32,10 +31,10 @@
     rgba(156, 63, 228, 0.27) 0%,
     rgba(255, 130, 175, 0.05) 100%
   );
-display: flex;
-justify-content: center;
-align-items: center;
-margin-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
 }
 
 .signup_right_content {
@@ -43,7 +42,7 @@ margin-right: 2rem;
     149deg,
     rgba(253, 209, 157, 0.27) 1.66%,
     rgba(252, 129, 173, 0.05) 100%
-  ); 
+  );
   width: 33.8257rem;
   height: 32.4906rem;
   flex-direction: column;
@@ -51,41 +50,93 @@ margin-right: 2rem;
   justify-content: space-between;
 }
 
-.signup_right_content_heading{
-    color: #EFEFEF;
-    font-family: Poppins;
-    font-size: 2.5206rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-align: center;
-    z-index: 5;
+.signup_right_content_heading {
+  color: #efefef;
+  font-family: Poppins;
+  font-size: 2.5206rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  z-index: 5;
+}
+
+.signup_email_content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1% 10%;
+}
+
+.signup_label {
+  color: #a4a4a4;
+  font-family: Poppins;
+  font-size: 14.33px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .signup_email_content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding-top: 1rem;
+}
+.signup_email_content_input {
+  width: 26.875rem;
+  height: 3.4375rem;
+  border-radius: 8px;
+  background: url("frontend/static/signup_email_pic.png"),
+    lightgray 0% 0% / 23.434971272945404px 23.434971272945404px repeat,
+    radial-gradient(
+      151.92% 127.02% at 15.32% 21.04%,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.04) 77.08%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  background-blend-mode: overlay, normal;
+  flex-shrink: 0;
+  backdrop-filter: blur(6.0781121253967285px);
 }
 
-#signup_email_content_label{
-    color: #A4A4A4;
-    font-family: Poppins;
-    font-size: 14.33px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    align-self: flex-start;
+.signup_email_content_input::placeholder {
+  width: 212.408px;
+  color: #a4a4a4;
+  font-family: Poppins;
+  font-size: 14.33px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
-.signup_email_content_input{
-    width: 75%;
-    height: 55px;
-    border-radius: 8px;
-    background: url("frontend/static/signup_email_pic.png"), lightgray 0% 0% / 23.434971272945404px 23.434971272945404px repeat, radial-gradient(151.92% 127.02% at 15.32% 21.04%, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.04) 77.08%, rgba(255, 255, 255, 0.00) 100%);
-    background-blend-mode: overlay, normal;
-    flex-shrink: 0;
-    backdrop-filter: blur(6.0781121253967285px);
+.signup_input_email {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.25rem;
+}
 
+.signup_btn{
+  width: 26.875rem;
+  height: 3.4375rem;
+  border-radius: 15px;
+  background: linear-gradient(99deg, #9C3FE4 0%, #C65647 100%);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.signup_btn_text{
+  width: 5.3734rem;
+  color: #FFF;
+  font-family: Poppins;
+  font-size: 17.918px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background-color: transparent;
+  border: none;
+  text-align: center;
 }

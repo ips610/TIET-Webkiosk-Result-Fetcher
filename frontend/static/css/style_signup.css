@@ -45,6 +45,7 @@
   );
   width: 33.8257rem;
   height: 32.4906rem;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;

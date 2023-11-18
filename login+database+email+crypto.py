@@ -186,7 +186,7 @@ if __name__ == "__main__":
     
     # print(sign_in_with_email_and_password('new_user@example.com','new_user_password'))
     
-    # entering_marks_in_firebase()
+    entering_marks_in_firebase()
     with open("marks_converted.json", "r") as f:
         data = json.load(f)
         

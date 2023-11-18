@@ -28,7 +28,7 @@
 
                     <div class="signup_input_email">
 
-                        <input type="email" id="email" name="email" placeholder="yourname@gmail.com"
+                        <input type="email" id="email" name="signup_email" placeholder="yourname@gmail.com"
                             class="signup_email_content_input">
 
                     </div>
@@ -51,7 +51,7 @@
 
                     <div class="signup_input_email">
 
-                        <input type="text" id="yourname" name="yourname" placeholder="@yourname"
+                        <input type="text" id="yourname" name="signup_username" placeholder="@yourname"
                             class="signup_email_content_input">
 
                     </div>
@@ -73,7 +73,7 @@
 
                     <div class="signup_input_email">
 
-                        <input type="password" id="password" name="password" placeholder="........"
+                        <input type="password" id="password" name="signup_password" placeholder="........"
                             class="signup_email_content_input">
 
                     </div>
@@ -99,6 +99,13 @@
 
                 </div>
                 
+                <form method="POST" action="/process_signup">
+                    <!-- Your form fields -->
+                    <input type="text" name="signup_username" placeholder="Username">
+                    <input type="email" name="signup_email" placeholder="Email">
+                    <input type="password" name="signup_password" placeholder="Password">
+                    <button type="submit">Sign Up</button>
+                </form>
 
             </div>
         </div>
